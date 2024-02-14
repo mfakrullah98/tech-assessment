@@ -1,4 +1,4 @@
-# <h3>tech-assessment</h3>
+# <h3>Tech Assessment</h3>
 
 #This is a simple POC microservices application using RabbitMQ as a message broker. 
 The application is composed of two services, serviceA and serviceB. 
