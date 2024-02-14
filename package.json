@@ -2,9 +2,12 @@
   "name": "tech-assessment",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "gateway/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start:serviceA": "node services/serviceA",
+    "start:serviceB": "node services/serviceB"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +16,8 @@
     "amqplib": "^0.10.3",
     "express": "^4.18.2",
     "express-gateway": "^1.16.11",
+    "fs": "^0.0.1-security",
+    "http-proxy-middleware": "^2.0.6",
     "openapi-validator": "^0.14.2"
   }
 }
