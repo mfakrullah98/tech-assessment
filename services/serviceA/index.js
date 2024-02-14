@@ -18,15 +18,25 @@ function loadUserData() {
 }
 
 
-function saveUserData(data) {
+function saveUserData(userId) {
     try {
-        fs.writeFileSync(userDataFile, JSON.stringify(data, null, 2));
+        const userData = {
+            users: [
+                {id: 1, name: "John Doe", favoriteGenres: ["pop", "rock"]},
+                // Other users ...
+                {id: 4, name: "Jill Doe", favoriteGenres: ["pop", "jazz", "hip-hop"]},
+                {id: userId, name: "James Doe", favoriteGenres: ["Classic", "Instrument"]}
+            ]
+        }
+        fs.writeFileSync(userDataFile, JSON.stringify(userData, null, 2));
     } catch (err) {
         console.error('Error saving user data:', err);
     }
 }
 
-
+app.get('/api/v1/users',async(req,res)=>{
+    res.send(loadUserData())
+})
 
 app.post('/api/v1/users/:id', async (req, res) => {
 
@@ -37,11 +47,7 @@ app.post('/api/v1/users/:id', async (req, res) => {
         userId: parseInt(req.params.id),
     };
 
-    saveUserData({
-        id:req.params.id,
-        name:"James Doe",
-        favoriteGenres:["Classic","Instrument"]
-    })
+    saveUserData(req.params.id);
 
     channel.assertExchange(exchange, 'topic', { durable: true });
     console.log(userEventData)
@@ -50,6 +56,19 @@ app.post('/api/v1/users/:id', async (req, res) => {
     res.send('Profile updated');
 });
 app.get('/api/v1/users/:id', (req, res) => {
+    const userData = loadUserData();
+    if (!userData.users) {
+        return res.status(404).send('User data not found');
+    }
+    const user = userData.users.find(user => user.id === parseInt(req.params.id));
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404).send('User not found');
+    }
+});
+
+app.get('/api/v2/users/:id', (req, res) => {
     const userData = loadUserData();
     if (!userData.users) {
         return res.status(404).send('User data not found');

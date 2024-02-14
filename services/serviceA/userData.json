@@ -1,8 +1,24 @@
 {
-  "id": "1",
-  "name": "James Doe",
-  "favoriteGenres": [
-    "Classic",
-    "Instrument"
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "favoriteGenres": ["pop", "rock"]
+    },
+    {
+      "id": 2,
+      "name": "Jane Doe",
+      "favoriteGenres": ["jazz", "blues"]
+    },
+    {
+      "id": 3,
+      "name": "Jim Doe",
+      "favoriteGenres": ["rock", "blues"]
+    },
+    {
+      "id": 4,
+      "name": "Jill Doe",
+      "favoriteGenres": ["pop", "jazz","hip-hop"]
+    }
   ]
 }
