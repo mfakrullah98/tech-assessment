@@ -50,10 +50,10 @@ app.post('/api/v1/users/:id', async (req, res) => {
     saveUserData(req.params.id);
 
     channel.assertExchange(exchange, 'topic', { durable: true });
-    console.log(userEventData)
+    console.log(`New user id : ${userEventData}`)
     channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(userEventData)));
 
-    res.send('Profile updated');
+    res.send('Profile created');
 });
 app.get('/api/v1/users/:id', (req, res) => {
     const userData = loadUserData();

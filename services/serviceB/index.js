@@ -15,7 +15,7 @@ const port = 3002;
 
     channel.consume(queue.queue, (msg) => {
         const userData = JSON.parse(msg.content.toString());
-        console.log('Received User Update:', userData);
+        console.log('Received new user:', userData);
     }, { noAck: true });
 })();
 
